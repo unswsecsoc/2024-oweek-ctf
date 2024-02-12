@@ -1,0 +1,2 @@
+User-agent: GPTBot
+Disallow: /no_one_will_ever_access_this_flag.txt

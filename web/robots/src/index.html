@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- 
+Credits to Mark E. Carter for the original fake captcha template :)
+-->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      #fake-captcha {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-family: "Questrial";
+        font-size: 4vw;
+        line-height: 4.25vw;
+        white-space: nowrap;
+        cursor: pointer;
+        color: #444;
+      }
+
+      #fake-captcha:hover {
+        color: #666;
+      }
+
+      #fake-checkbox {
+        position: relative;
+        float: left;
+        margin-right: 1vw;
+        width: 4vw;
+        height: 4vw;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        transition: all 0.2s;
+        box-sizing: border-box;
+      }
+
+      #fake-checkbox:hover {
+        border-color: #aaa;
+        background: #eee;
+      }
+
+      #fake-captcha.loading {
+        cursor: default;
+        color: #444;
+      }
+
+      .loading #fake-checkbox {
+        border-radius: 50%;
+        background: transparent;
+        border-color: #888;
+        border-width: 12px;
+        border-style: inset;
+        animation: spin 1s infinite linear;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .fail {
+        animation: fail 0.1s 4;
+      }
+
+      @keyframes fail {
+        0% {
+          transform: translate(-50%, -50%);
+        }
+
+        25% {
+          transform: translate(-51%, -50%);
+        }
+
+        50% {
+          transform: translate(-50%, -50%);
+        }
+
+        75% {
+          transform: translate(-49%, -50%);
+        }
+
+        100% {
+          transform: translate(-50%, -50%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fake-captcha">
+      <div id="fake-checkbox"></div> Are you human?
+    </div>
+	  
+    <script>
+      let captcha = document.getElementById("fake-captcha");
+      captcha.onclick = () => {
+        if (captcha.className.includes("loading")) return;
+        captcha.className = "loading";
+        setTimeout(() => {
+          captcha.className = captcha.className.replace("loading", "");
+          captcha.className += "fail"
+        }, Math.floor((Math.random() * 3000) + 1000));
+      }
+    </script>
+  </body>
+</html>
